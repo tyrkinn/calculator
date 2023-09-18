@@ -6,7 +6,7 @@ export type InputLineProps = {
 
 
 
-export const InputLine: React.FC<InputLineProps> = ({ inputLine, res }) => {
+export const InputLine: React.FC<InputLineProps> = ({ inputLine }) => {
     return (
         <div>
             {inputLine}

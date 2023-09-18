@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react'
 import './App.css'
 import { CalcButtons } from './components/CalcButtons'
 import { InputLine } from './components/InputLine'
@@ -10,8 +8,6 @@ export type SetState<T> = React.Dispatch<React.SetStateAction<T>>
 function App() {
   const [inputLine, setInputLine] = useState<string>("")
   const [res, setRes] = useState<number>(0)
-
-
 
 
   return (
