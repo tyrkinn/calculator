@@ -4,7 +4,7 @@ export type InputLineProps = {
 
 export const InputLine: React.FC<InputLineProps> = ({ inputLine }) => {
     return (
-        <div>
+        <div className='w-28 text-center h-6 border'>
             {inputLine}
         </div>
     )
