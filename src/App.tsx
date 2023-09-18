@@ -9,9 +9,9 @@ function App() {
   const [calcResult, setCalcResult] = useState<number>(0)
 
   return (
-    <div className='container mx-auto'>
-      <div className='flex justify-center'>
-        <InputLine inputLine={inputLine} res={calcResult} />
+    <div className='container mx-auto w-screen h-screen'>
+      <div className='flex flex-col w-full h-full items-center justify-center gap-2'>
+        <InputLine inputLine={inputLine} />
         <CalcButtons setInputLine={setInputLine} inputLine={inputLine} res={calcResult} setRes={setCalcResult} />
       </div>
     </div>
