@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
-import type { BinaryOp, SetState } from "../types"
-
+import type { SetState } from "../types"
+import { Controls, OperationSign } from "../enums"
+import { getCalcFunc } from "../service"
+import { useState } from 'react'
 
 export type CalcButtonsProps = {
     setInputLine: SetState<string>
@@ -9,75 +10,49 @@ export type CalcButtonsProps = {
     inputLine: string,
 }
 
-
-export type Calc = {
-    x: number,
-    y: number,
-    operation: string,
-    res: number
-}
-
-export const binaryID: BinaryOp = (_x, _y) => 0
-
-const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+const digits = '1234567890'.split('')
 
 export const CalcButtons: React.FC<CalcButtonsProps> = ({ setInputLine, inputLine, setRes }) => {
 
-    const [calc, setCalc] = useState<Calc>({
-        x: 0,
-        y: 0,
-        operation: "",
-        res: 0
-    })
+    const [operator, setOperator] = useState<OperationSign | null>(null)
 
-    const handleClick = (value: string | number) => {
+    const handleClick = (value: string) => {
         setInputLine((prev) => prev + value.toString())
     }
 
-
-    const handleOpShat = async (value: string, inputLine: string) => {
-        switch (value) {
-            case "=":
-                let op = inputLine.split(calc.operation)
-                setCalc({
-                    y: Number(op[0]),
-                    x: Number(op[1]),
-                    operation: calc.operation,
-                    res: operations[calc.operation](Number(op[0]), Number(op[1]))
-                })
-
-                break
-            case "C":
-                setInputLine('')
-                break
-            default:
-                setCalc((prev) => ({
-                    ...prev,
-                    operation: value,
-                }))
-                setInputLine((prev) => prev + value.toString())
-
-        }
+    const handleOpShat = (sign: OperationSign) => {
+      setInputLine(prev => prev + sign)
+      setOperator(sign)
     }
 
-    useEffect(() => {
-        setRes(calc.res)
-        setInputLine(String(calc.res))
-    }, [calc.res])
+    const handleControls = (control: Controls) => {
+        switch (control) {
+            case Controls.CLEAR:
+                setInputLine('')
+                break
+            case Controls.EQUALS:
+                if (operator === null) return
+                const [x, y] = inputLine.trim().split(operator).map(Number)
+                const calcFn = getCalcFunc(operator)
+                const calcResult = calcFn(x, y)
+                setRes(calcResult)
+                setInputLine(calcResult.toString())
+                setOperator(null)
+        }
 
-    useEffect(() => {
-        setInputLine('')
-    }, [])
-
+    }
 
     return (
-        <div>
+        <div className="flex gap-2">
             <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-2">
                 {digits.map(d =>
-                    <button key={d} onClick={() => handleClick(d)}>{d}</button>
+                    <button key={d} className="digit last:col-span-3" onClick={() => handleClick(d)}>{d}</button>
                 )}
             </div>
-            {Object.keys(operations).map(key => <button onClick={() => handleOpShat(key, inputLine)} key={key}>{key}</button>)}
+            <div className="grid grid-cols-2 grid-rows-4 grid-flow-col gap-2">
+                {Object.values(OperationSign).map(sign => <button onClick={() => handleOpShat(sign)} key={sign}>{sign}</button>)}
+                {Object.values(Controls).map(control => <button onClick={() => handleControls(control)} key={control}>{control}</button>)}
+            </div>
 
         </div>
     )
