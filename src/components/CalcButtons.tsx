@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { SetState } from "../App"
+import type { BinaryOp, SetState } from "../types"
 
 
 export type CalcButtonsProps = {
