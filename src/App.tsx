@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { CalcButtons } from './components/CalcButtons'
 import { InputLine } from './components/InputLine'
 
-export type SetState<T> = React.Dispatch<React.SetStateAction<T>>
 
 function App() {
   const [inputLine, setInputLine] = useState<string>("")
