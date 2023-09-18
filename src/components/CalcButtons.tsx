@@ -10,28 +10,6 @@ export type CalcButtonsProps = {
 }
 
 
-
-const sum = (x: number, y: number) => {
-    const res = x + y
-    return res
-}
-
-const minus = (x: number, y: number) => {
-    const res = x - y
-    return res
-}
-
-const divide = (x: number, y: number) => {
-    const res = x / y
-    return res
-}
-
-const multi = (x: number, y: number) => {
-    const res = x * y
-    return res
-}
-
-
 export type Calc = {
     x: number,
     y: number,
@@ -39,22 +17,10 @@ export type Calc = {
     res: number
 }
 
-export type BinaryOp = (x: number, y: number) => number
-
 export const binaryID: BinaryOp = (_x, _y) => 0
 
 export const CalcButtons: React.FC<CalcButtonsProps> = ({ setInputLine, inputLine, setRes }) => {
     const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-
-
-    const operations: Record<string, BinaryOp> = {
-        "+": sum,
-        "-": minus,
-        "/": divide,
-        "*": multi,
-        "=": binaryID,
-        "C": binaryID
-    }
 
     const [calc, setCalc] = useState<Calc>({
         x: 0,
