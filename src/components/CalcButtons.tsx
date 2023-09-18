@@ -19,8 +19,9 @@ export type Calc = {
 
 export const binaryID: BinaryOp = (_x, _y) => 0
 
+const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+
 export const CalcButtons: React.FC<CalcButtonsProps> = ({ setInputLine, inputLine, setRes }) => {
-    const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
     const [calc, setCalc] = useState<Calc>({
         x: 0,
