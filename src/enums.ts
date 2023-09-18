@@ -5,3 +5,8 @@ export enum OperationSign {
   DIV = '/',
   POW = '**'
 }
+
+export enum Controls {
+  EQUALS = '=',
+  CLEAR = 'CR'
+}
