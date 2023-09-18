@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import { CalcButtons } from './components/CalcButtons'
 import { InputLine } from './components/InputLine'
 
