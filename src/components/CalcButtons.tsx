@@ -21,6 +21,7 @@ export const CalcButtons: React.FC<CalcButtonsProps> = ({ setInputLine, inputLin
     }
 
     const handleOpShat = (sign: OperationSign) => {
+      if (operator != null) return
       setInputLine(prev => prev + sign)
       setOperator(sign)
     }
